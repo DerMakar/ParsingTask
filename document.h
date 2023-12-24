@@ -8,8 +8,6 @@ namespace rstyle {
 	public:
 		explicit Document(const std::string& file_name);
 
-		const Node& GetRoot() const;
-
 		void Print(const std::string& outfile) const;
 		
 	private:

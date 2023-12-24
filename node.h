@@ -24,9 +24,15 @@ namespace rstyle {
 		Node() = default;
 
 		template <typename V>
-		Node(V value)
+		Node(const V& value)
 			: value_(value){
 		}
+
+		Node(const Node& other) = default;
+		Node operator=(const Node& other) = delete;
+
+		Node(Node&& other) = default;
+		Node operator=(Node&& other) = delete;
 
 		template <typename V>
 		Node(int id, int parent_id, const std::string& name,const V& value)
@@ -43,17 +49,7 @@ namespace rstyle {
 		const std::string& GetName() const;
 
 		const Value& GetValue() const;
-
-		bool IsString() const;
-
-		bool IsList() const;
-
-		bool IsNull() const;
-
-		const std::string& AsString() const;
-
-		const List& AsList() const;
-
+				
 	private:
 		int id_ = -1;
 		int parent_id_ = -1;

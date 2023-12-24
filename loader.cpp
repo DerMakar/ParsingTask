@@ -28,7 +28,7 @@ namespace rstyle {
             result.push_back(std::make_shared<Node> (LoadNode(input, ++id, start_id)));
             input >> std::ws;
             c = input.peek();
-            if (isalpha(c)) {
+            if (isalpha(c) || '_') {
                 continue;
             }
             else if (input.peek() != '}') {
@@ -43,7 +43,7 @@ namespace rstyle {
 		using namespace std::literals;
         std::string text;
         getline(input, text, '\"');
-        text = Trim(text);
+        text = Trim(text); // if we need it
         return Node(id, parent_id, std::move(name), move(text));
 	}
 
@@ -62,7 +62,7 @@ namespace rstyle {
             return LoadString(input, move(name), id, parent_id);
         }
         else {
-            throw ParsingError("Неверный формат данных"s);
+            throw ParsingError("Неверный формат данных"s); // another check for empty file?
         }
     }
 	

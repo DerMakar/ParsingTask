@@ -17,9 +17,4 @@ namespace rstyle {
 		if(!output.is_open()) throw std::exception("no such outfile");
 		PrintNode(*root_, output, 0);
 	}
-
-
-	const Node& Document::GetRoot() const {
-		return *root_;
-	}
 }//namespace rstyle
