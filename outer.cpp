@@ -1,11 +1,6 @@
 #include "outer.h"
 
 namespace rstyle {
-    void PrintValue(std::nullptr_t, std::ostream& out, int indent_step) {
-        using namespace std::literals;
-        out << "null"sv;
-    }
-
     void PrintValue(const std::string& str, std::ostream& out, int indent_step) {
         using namespace std::literals;
         out << str << std::endl;
@@ -19,6 +14,8 @@ namespace rstyle {
 
     void PrintNode(const Node& node, std::ostream& out, int indent_step) {
         out << node.GetId();
+        out << ", ";
+        out << node.GetParId();
         out << ", ";
         out << node.GetName();
         out << ", ";

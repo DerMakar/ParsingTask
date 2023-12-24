@@ -29,13 +29,16 @@ namespace rstyle {
 		}
 
 		template <typename V>
-		Node(int id, const std::string& name,const V& value)
+		Node(int id, int parent_id, const std::string& name,const V& value)
 			: id_(id)
+			, parent_id_(parent_id)
 			, name_(name)
 			, value_(value){
 		}
 
 		int GetId() const;
+
+		int GetParId() const;
 
 		const std::string& GetName() const;
 
@@ -53,6 +56,7 @@ namespace rstyle {
 
 	private:
 		int id_ = -1;
+		int parent_id_ = -1;
 		std::string name_;
 		Value value_;
 	};

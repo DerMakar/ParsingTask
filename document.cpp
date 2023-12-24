@@ -9,7 +9,7 @@ namespace rstyle {
 		std::ifstream input (file_name);
 		if (!input.is_open()) throw std::exception("no such infile");
 		int id = 1;
-		root_ = std::make_unique<Node> (LoadNode(input, id));		
+		root_ = std::make_unique<Node> (LoadNode(input, id, 0));		
 	}
 
 	void Document::Print(const std::string& outfile) const {

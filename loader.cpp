@@ -13,7 +13,7 @@ namespace rstyle {
         return std::string(str);
     }
     
-   	Node LoadList(std::istream& input, std::string&& name, int& id) {
+   	Node LoadList(std::istream& input, std::string&& name, int& id, int parent_id) {
 		List result;
         int start_id = id;
         char c = 'a';
@@ -25,7 +25,7 @@ namespace rstyle {
         c = input.peek();
         while (c != '}') {
             input >> std::ws;
-            result.push_back(std::make_shared<Node> (LoadNode(input, ++id)));
+            result.push_back(std::make_shared<Node> (LoadNode(input, ++id, start_id)));
             input >> std::ws;
             c = input.peek();
             if (isalpha(c)) {
@@ -36,18 +36,18 @@ namespace rstyle {
             }
         }
         input >> c;
-       	return Node(start_id, std::move(name), std::move(result));
+       	return Node(start_id, parent_id, std::move(name), std::move(result));
 	}
 
-    Node LoadString(std::istream& input, std::string&& name, int& id) {
+    Node LoadString(std::istream& input, std::string&& name, int& id, int parent_id) {
 		using namespace std::literals;
         std::string text;
         getline(input, text, '\"');
         text = Trim(text);
-        return Node(id, std::move(name), move(text));
+        return Node(id, parent_id, std::move(name), move(text));
 	}
 
-	Node LoadNode(std::istream& input, int& id) {
+	Node LoadNode(std::istream& input, int& id, int parent_id) {
 		using namespace std::literals;
         std::string name;
         getline(input, name, '=');
@@ -56,10 +56,10 @@ namespace rstyle {
         input >> c;
 		if (c == '{') {
             input.putback(c);
-            return LoadList(input, move(name), id);
+            return LoadList(input, move(name), id, parent_id);
         }
         else if (c == '"') {
-            return LoadString(input, move(name), id);
+            return LoadString(input, move(name), id, parent_id);
         }
         else {
             throw ParsingError("Неверный формат данных"s);

@@ -8,14 +8,12 @@ namespace rstyle {
         out << value;
     }
     
-    void PrintValue(std::nullptr_t, std::ostream& out, int indent_step);
-
     void PrintValue(const std::string& str, std::ostream& out, int indent_step);
 
     void PrintIndent(std::ostream& out, int indent_step);
 
     void PrintNode(const Node& node, std::ostream& out, int indent_step);
 
-    void PrintValue(const List& list, std::ostream& out, int indent_step);  
+    void PrintValue(const List& list, std::ostream& out, int indent_step);
     
 } //namespace rstyle

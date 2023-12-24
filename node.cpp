@@ -5,6 +5,10 @@ namespace rstyle {
 		return id_;
 	}
 
+	int Node::GetParId() const {
+		return parent_id_;
+	}
+
 	const std::string& Node::GetName() const {
 		return name_;
 	}
