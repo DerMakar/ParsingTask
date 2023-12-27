@@ -19,7 +19,7 @@ namespace rstyle {
                 char c = input.get();
                 rest_of_data += c;
             }
-            throw ParsingError("Error: not full parsing. Rest of data: \"" + rest_of_data + "\"");
+            throw ParsingError();
         }
 	}
 
@@ -50,11 +50,11 @@ namespace rstyle {
         char c = 'a';
         input >> c;
         if (c != '{') {
-            throw ParsingError("Error: Expected '{'");
+            throw ParsingError();
         }
         input >> std::ws;
         c = input.peek();
-        if(c == '{') throw ParsingError("Error: double '{'");
+        if(c == '{') throw ParsingError();
         while (c != '}') {
             input >> std::ws;
             result.push_back(std::make_shared<Node>(LoadNode(input, ++id, start_id)));
@@ -64,7 +64,7 @@ namespace rstyle {
                 continue;
             }
             else if (input.peek() != '}') {
-                throw ParsingError("Error: Expected ' ' or '}'");
+                throw ParsingError();
             }
         }
         input >> c;
@@ -75,7 +75,7 @@ namespace rstyle {
         using namespace std::literals;
         std::string text;
         getline(input, text, '\"');
-        if(text.empty()) throw ParsingError("Error: empty str_value");
+        if(text.empty()) throw ParsingError();
         text = Trim(text); // if we need it
         return Node(id, parent_id, std::move(name), move(text));
     }
@@ -95,7 +95,7 @@ namespace rstyle {
             return LoadString(input, move(name), id, parent_id);
         }
         else {
-            throw ParsingError("Неверный формат данных"s); // another check for empty file?
+            throw ParsingError(); 
         }
     }
 }//namespace rstyle

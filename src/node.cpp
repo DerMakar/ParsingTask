@@ -1,7 +1,11 @@
 #include "node.h"
 
 namespace rstyle {
-	int Node::GetId() const {
+    const char* ParsingError::what() const {
+        return message_;
+    }
+    
+    int Node::GetId() const {
 		return id_;
 	}
 

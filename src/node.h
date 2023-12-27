@@ -13,9 +13,16 @@ namespace rstyle {
 	
 	using List = std::vector<std::shared_ptr<Node>>;
 		
-	class ParsingError : public std::runtime_error {
+	class ParsingError : public std::exception {
 	public:
-		using runtime_error::runtime_error;
+		
+		ParsingError()
+			: message_("Неверный формат данных") {
+		}
+		
+		const char* what() const override;
+	private:
+		const char* message_;
 	};
 
 	class Node {
